@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -53,6 +54,11 @@ class KeypadDialog(
         errorView = findViewById(R.id.tvKeypadError)
         findViewById<TextView>(R.id.tvKeypadTitle).text = dialogTitle
 
+        // 快捷段只在输 IP 时出现
+        if (isPort) findViewById<View>(R.id.rowQuick).visibility = View.GONE
+        findViewById<Button>(R.id.keyQuick192).setOnClickListener { appendShortcut("192") }
+        findViewById<Button>(R.id.keyQuick168).setOnClickListener { appendShortcut("168") }
+
         bindDigits()
         render()
 
@@ -82,11 +88,35 @@ class KeypadDialog(
         }
     }
 
+    /**
+     * 快捷段：把"当前正在输入的那一段"整体替换为 seg（如 192），并自动补上小数点。
+     * 这样无论光标位置如何，"192." → "168." → 手输 "123." → "200" 的节奏不会打错：
+     * - 当前段为空：直接填入
+     * - 当前段已有内容（如 "12"）：替换为快捷段，用户不用先按删除
+     * - 已是第四段（3 个点）且为空：不再追加（避免 "x.x.x.x." 非法尾巴）
+     */
+    private fun appendShortcut(seg: String) {
+        val dot = buffer.lastIndexOf('.')
+        val cur = if (dot < 0) buffer.toString() else buffer.substring(dot + 1)
+        val head = if (dot < 0) "" else buffer.substring(0, dot + 1)
+        if (cur.isEmpty() && buffer.count { it == '.' } >= 3) return
+        buffer.setLength(0)
+        buffer.append(head).append(seg)
+        if (buffer.count { it == '.' } < 3) buffer.append('.')
+        render()
+    }
+
     private fun append(ch: String) {
         if (buffer.length >= maxLen) return
         if (ch == ".") {
-            if (isPort) return
-            if (buffer.contains('.')) return
+            if (isPort) return                          // 端口不含小数点
+            if (buffer.isEmpty()) return                // 不能以 . 开头
+            if (buffer.last() == '.') return            // 不允许连续两个 .
+            if (buffer.count { it == '.' } >= 3) return // IPv4 共 4 段，最多 3 个 .
+        } else {
+            // 数字：按 . 分段，每段最多 3 位
+            val seg = buffer.substring(buffer.lastIndexOf('.') + 1)
+            if (seg.length >= 3) return
         }
         buffer.append(ch)
         render()

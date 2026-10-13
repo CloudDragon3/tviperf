@@ -46,8 +46,20 @@ object IperfArgs {
         // -J 的作用不止"方便解析"：结果不受系统语言/区域设置影响，
         // 而且字段是稳定的，比正则扒人类可读文本可靠得多。
         a += "-J"
+        // 【诊断构建】--debug=3（INFO 级）会把状态机流转和线程生命周期打到 stdout：
+        //   "Reading new State..." / "Thread FD %d created|stopped" / "All threads stopped"
+        // 不能用 4（DEBUG 级）：会逐块打印收发字节数，UDP 1Gbps 下每秒 8 万行。
+        // debug 输出里会夹带参数 JSON（含花括号），IperfResultParser.extractJson
+        // 已改为取"最后一个顶格 {"，可容忍这些前缀噪声。
+        // 诊断结束后把 DEBUG_MODE 改回 false 再发布。
+        if (DEBUG_MODE) {
+            a += "--debug=3"
+        }
         return a
     }
+
+    /** 诊断开关：true 时给 iperf3 加 --debug=3。海信 v7a 问题已定位修复，发布版保持 false。 */
+    const val DEBUG_MODE = false
 
     /** 给 UI 显示用的一行等价命令 */
     fun preview(test: IperfTest, host: String, port: Int): String =

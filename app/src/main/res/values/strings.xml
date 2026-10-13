@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TV 局域网测速</string>
+    <string name="app_name">卧龙TV局域网测速工具</string>
 
     <string name="title">局域网带宽实测</string>
     <string name="subtitle">连接局域网内的 iperf3 服务端，测出这条链路的真实带宽</string>

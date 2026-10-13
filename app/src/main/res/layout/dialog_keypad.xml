@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 紧凑版数字键盘：
+     - 整体从 560dp 收窄到 440dp，数值字号 40sp→30sp，键高 62dp→52dp
+     - 底部三个操作按钮强制同高同字号（此前 Btn.Primary 的大内边距导致三个键不齐） -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="560dp"
+    android:layout_width="440dp"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_card"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="18dp">
 
     <TextView
         android:id="@+id/tvKeypadTitle"
         style="@style/Text.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:text="@string/keypad_title" />
 
     <TextView
@@ -18,10 +22,10 @@
         style="@style/Text.Value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bg_card"
-        android:padding="12dp"
-        android:textSize="40sp"
+        android:padding="10dp"
+        android:textSize="30sp"
         android:text="" />
 
     <TextView
@@ -29,21 +33,57 @@
         style="@style/Text.Hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:minHeight="22dp" />
+        android:layout_marginTop="4dp"
+        android:minHeight="20dp" />
+
+    <!-- 常用网段快捷段：端口模式下由代码隐藏（只在 IPv4 输入时出现） -->
+    <LinearLayout
+        android:id="@+id/rowQuick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/keyQuick192"
+            style="@style/Btn.Base"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:textSize="16sp"
+            android:text="192." />
+
+        <Button
+            android:id="@+id/keyQuick168"
+            style="@style/Btn.Base"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:textSize="16sp"
+            android:text="168." />
+    </LinearLayout>
 
     <!-- 数字键 3×4 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/key1"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:text="1" />
 
@@ -51,8 +91,8 @@
             android:id="@+id/key2"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="2" />
 
@@ -60,8 +100,8 @@
             android:id="@+id/key3"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="3" />
     </LinearLayout>
@@ -69,14 +109,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/key4"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:text="4" />
 
@@ -84,8 +124,8 @@
             android:id="@+id/key5"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="5" />
 
@@ -93,8 +133,8 @@
             android:id="@+id/key6"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="6" />
     </LinearLayout>
@@ -102,14 +142,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/key7"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:text="7" />
 
@@ -117,8 +157,8 @@
             android:id="@+id/key8"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="8" />
 
@@ -126,8 +166,8 @@
             android:id="@+id/key9"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="9" />
     </LinearLayout>
@@ -135,14 +175,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/keyDot"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:text="." />
 
@@ -150,8 +190,8 @@
             android:id="@+id/key0"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="0" />
 
@@ -159,43 +199,57 @@
             android:id="@+id/keyDel"
             style="@style/Btn.Key"
             android:layout_width="0dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:textSize="20sp"
             android:text="⌫" />
     </LinearLayout>
 
-    <!-- 操作 -->
+    <!-- 操作：三键强制同尺寸（48dp 高、17sp、统一内边距），确认键仅以底色区分 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/keyClear"
             style="@style/Btn.Base"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
             android:text="@string/btn_clear" />
 
         <Button
             android:id="@+id/keyCancel"
             style="@style/Btn.Base"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
             android:text="@string/btn_cancel" />
 
         <Button
             android:id="@+id/keyOk"
             style="@style/Btn.Primary"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:textSize="17sp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
             android:text="@string/btn_ok" />
     </LinearLayout>
 </LinearLayout>

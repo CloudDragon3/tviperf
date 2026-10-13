@@ -164,8 +164,19 @@ class MainActivity : Activity() {
 
                         else -> {
                             val parsed = IperfResultParser.parse(test, outcome.stdout)
-                            if (!parsed.ok && outcome.stderr.isNotBlank()) {
-                                parsed.copy(note = (parsed.note ?: "") + " ｜ stderr: " + outcome.stderr.trim().take(300))
+                            if (!parsed.ok) {
+                                var note = parsed.note ?: ""
+                                // 诊断：失败时把 stdout 尾巴（debug 状态机/线程生命周期）带到界面
+                                if (outcome.stdout.isNotBlank()) {
+                                    val tail = outcome.stdout.trim()
+                                        .replace(Regex("\\s+"), " ")
+                                        .takeLast(360)
+                                    note += " ｜ 调试:…" + tail
+                                }
+                                if (outcome.stderr.isNotBlank()) {
+                                    note += " ｜ stderr: " + outcome.stderr.trim().take(200)
+                                }
+                                parsed.copy(note = note)
                             } else {
                                 parsed
                             }
@@ -182,6 +193,8 @@ class MainActivity : Activity() {
                     val verdict = BottleneckJudge.judge(
                         samples[IperfTest.TCP_DOWN],
                         samples[IperfTest.TCP_UP],
+                        samples[IperfTest.UDP_DOWN],
+                        samples[IperfTest.UDP_UP],
                         linkSnapshot
                     )
                     renderVerdict(verdict)

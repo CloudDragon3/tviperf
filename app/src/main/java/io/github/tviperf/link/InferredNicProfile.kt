@@ -51,7 +51,8 @@ object InferredNicProfile {
         when {
             onWifi -> {
                 headline = "当前在走 Wi-Fi"
-                lines += "USB 网卡没被选中或没插好。测速前建议关掉电视 Wi-Fi 再重测。"
+                lines += "流量由 Wi-Fi 承载——这是完全合法的链路选择，Wi-Fi 实测吞吐可直接用于评估无线场景能力。"
+                lines += "若设备上插着有线网卡，它此刻未被选中；想测有线链路时，先关闭电视 Wi-Fi 让流量切过去。"
             }
 
             usbIface -> {
@@ -77,7 +78,7 @@ object InferredNicProfile {
 
         if (tcpDownMbps != null) {
             lines += "实测 TCP 下行 ${"%.0f".format(tcpDownMbps)} Mbps → 参考档位：" +
-               tierDescription(tcpDownMbps, usbIface, ethIface)
+               tierDescription(tcpDownMbps, iface, usbIface, ethIface)
         }
 
         val mt = snapshot.carrier?.mtu
@@ -88,17 +89,19 @@ object InferredNicProfile {
         return NicInference(headline, lines.joinToString("\n"), cdcSuspicion, onWifi)
     }
 
-    private fun tierDescription(v: Double, usbIface: Boolean, ethIface: Boolean): String = when {
+    private fun tierDescription(v: Double, iface: String?, usbIface: Boolean, ethIface: Boolean): String = when {
         v >= 1500.0 -> "1500+ Mbps，2.5G 链路真正打通"
         v >= 850.0 -> "850~1000 Mbps，千兆对端下的正常水平"
         v in 600.0..850.0 ->
-            if (usbIface) "600~850 Mbps，驱动可用但有折损（接口名 $usbIface 偏 cdc_ncm）"
+            if (usbIface) "600~850 Mbps，USB 通用驱动常见折损区间（接口 $iface）"
             else "600~850 Mbps，属正常范围，瓶颈在主机 CPU"
         v in 400.0..550.0 ->
-            if (usbIface) "400~550 Mbps，典型的 cdc_ncm 下行天花板"
+            if (usbIface) "400~550 Mbps，典型的 USB 通用驱动下行天花板"
             else "400~550 Mbps，需要结合接口名继续判断"
-        v in 300.0..400.0 -> "300~400 Mbps，要么是 cdc_ncm，要么仍挂在 USB 2.0 总线"
-        v < 150.0 -> "不足 150 Mbps，疑似走了电视自带百兆网口或协商降级到百兆"
+        v in 300.0..400.0 ->
+            if (usbIface) "300~400 Mbps，可能是 USB 通用驱动或仍挂在 USB 2.0 总线上"
+            else "300~400 Mbps，检查网线与交换机端口，或网卡是否挂在 USB 2.0 总线"
+        v < 150.0 -> "不足 150 Mbps，疑似走了电视自带百兆网口，或链路协商降级到百兆"
         else -> "位于常规区间之间的过渡档位"
     }
 }

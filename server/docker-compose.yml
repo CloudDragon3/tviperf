@@ -1,0 +1,9 @@
+services:
+  iperf3-server:
+    build: .
+    image: tviperf-iperf3-server:3.22
+    container_name: iperf3-server
+    ports:
+      - "5201:5201/tcp"
+      - "5201:5201/udp"
+    restart: unless-stopped
