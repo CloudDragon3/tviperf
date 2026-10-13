@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="560dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvKeypadTitle"
+        style="@style/Text.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/keypad_title" />
+
+    <TextView
+        android:id="@+id/tvKeypadValue"
+        style="@style/Text.Value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_card"
+        android:padding="12dp"
+        android:textSize="40sp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tvKeypadError"
+        style="@style/Text.Hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:minHeight="22dp" />
+
+    <!-- 数字键 3×4 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/key1"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/key2"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/key3"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/key4"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/key5"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/key6"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="6" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/key7"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/key8"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/key9"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="9" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/keyDot"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:text="." />
+
+        <Button
+            android:id="@+id/key0"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/keyDel"
+            style="@style/Btn.Key"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="⌫" />
+    </LinearLayout>
+
+    <!-- 操作 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/keyClear"
+            style="@style/Btn.Base"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_clear" />
+
+        <Button
+            android:id="@+id/keyCancel"
+            style="@style/Btn.Base"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="@string/btn_cancel" />
+
+        <Button
+            android:id="@+id/keyOk"
+            style="@style/Btn.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="@string/btn_ok" />
+    </LinearLayout>
+</LinearLayout>

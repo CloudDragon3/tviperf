@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="bg">#0D1117</color>
+    <color name="panel">#161B22</color>
+    <color name="panel_alt">#1C2230</color>
+    <color name="panel_border">#2A313C</color>
+
+    <color name="text_primary">#E6EDF3</color>
+    <color name="text_secondary">#9AA4B2</color>
+    <color name="text_muted">#6E7681</color>
+
+    <color name="accent">#2F81F7</color>
+    <color name="focus_bg">#1F6FEB</color>
+    <color name="focus_border">#7CB7FF</color>
+
+    <color name="ok">#3FB950</color>
+    <color name="warn">#D29922</color>
+    <color name="bad">#F85149</color>
+    <color name="inferred">#8B949E</color>
+
+    <color name="primary_btn">#1F6FEB</color>
+    <color name="primary_btn_focus">#388BFD</color>
+
+</resources>
