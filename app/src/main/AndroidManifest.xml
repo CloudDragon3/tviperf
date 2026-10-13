@@ -26,9 +26,14 @@
             android:name=".ui.MainActivity"
             android:exported="true"
             android:launchMode="singleTop">
+            <!-- 同时声明两个 category：
+                 LEANBACK_LAUNCHER -> 标准 Android TV 主屏（Google 认证机型，如 TCL）
+                 LAUNCHER          -> 手机桌面 / 品牌自研 launcher（部分海信、创维等非标准 TV 系统只认这个）
+                 只写 LEANBACK 会导致在自研 launcher 的电视上"装上了但找不到图标" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
