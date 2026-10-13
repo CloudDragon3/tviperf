@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TV 局域网测速</string>
+
+    <string name="title">局域网带宽实测</string>
+    <string name="subtitle">连接局域网内的 iperf3 服务端，测出这条链路的真实带宽</string>
+
+    <string name="label_host">服务器地址</string>
+    <string name="label_port">端口</string>
+    <string name="host_unset">点击输入 IP</string>
+
+    <string name="btn_diag">设备与链路信息</string>
+    <string name="btn_start">开始测速</string>
+    <string name="btn_cancel">中止</string>
+    <string name="btn_back">返回</string>
+    <string name="btn_ok">确定</string>
+    <string name="btn_del">删除</string>
+    <string name="btn_clear">清空</string>
+
+    <string name="status_idle">就绪</string>
+    <string name="live_idle">实时速率  -- </string>
+
+    <string name="col_results">四项实测结果</string>
+    <string name="col_verdict">瓶颈判定</string>
+
+    <string name="test_tcp_down">TCP 下行 (服务端→TV)</string>
+    <string name="test_tcp_up">TCP 上行 (TV→服务端)</string>
+    <string name="test_udp_down">UDP 下行 (服务端→TV)</string>
+    <string name="test_udp_up">UDP 上行 (TV→服务端)</string>
+
+    <string name="placeholder">----</string>
+
+    <string name="diag_title">设备与链路信息</string>
+    <string name="diag_left">设备与接口事实（实测）</string>
+    <string name="diag_right">推断与结论</string>
+    <string name="diag_hint">灰色 = 推断值，不是硬件读数</string>
+
+    <string name="keypad_title">输入服务器地址</string>
+    <string name="keypad_title_port">输入端口</string>
+</resources>
