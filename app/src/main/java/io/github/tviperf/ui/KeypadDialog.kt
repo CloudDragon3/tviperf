@@ -85,8 +85,14 @@ class KeypadDialog(
     private fun append(ch: String) {
         if (buffer.length >= maxLen) return
         if (ch == ".") {
-            if (isPort) return
-            if (buffer.contains('.')) return
+            if (isPort) return                          // 端口不含小数点
+            if (buffer.isEmpty()) return                // 不能以 . 开头
+            if (buffer.last() == '.') return            // 不允许连续两个 .
+            if (buffer.count { it == '.' } >= 3) return // IPv4 共 4 段，最多 3 个 .
+        } else {
+            // 数字：按 . 分段，每段最多 3 位
+            val seg = buffer.substring(buffer.lastIndexOf('.') + 1)
+            if (seg.length >= 3) return
         }
         buffer.append(ch)
         render()

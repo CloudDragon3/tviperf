@@ -21,8 +21,11 @@ android {
         applicationId = "io.github.tviperf"
         minSdk = 28          // 预编译 libiperf3.so 由 NDK r28c / API 28 构建，低于 28 会起不来
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.1.1"
+        // versionName 重新从 1.0.0 起算（发布历史以这一版为首版）。
+        // versionCode 保持递增而不回到 1：这样已安装的旧构建可以直接覆盖升级，
+        // 不必先卸载（Android 会拒绝 versionCode 降低的安装包）。
+        versionCode = 4
+        versionName = "1.0.0"
 
         // 只打 ARM 两种 ABI。电视 SoC（MT9655）可能是 32 位系统，两个都带上最稳妥。
         ndk {
