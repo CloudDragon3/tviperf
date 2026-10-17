@@ -62,7 +62,7 @@
 
 APK 内置了 iperf3 **3.22** 的自编译原生二进制（以 `libiperf3.so` 形式打包，双架构）。安装时系统把它解压到 `nativeLibraryDir`——这是 Android 10+ W^X 策略下唯一允许执行原生文件的位置——测速时以子进程方式运行真正的 iperf3，并解析其 JSON 输出。
 
-自编译版本针对 Android bionic 做了少量兼容性修正（如对已退出线程的 `pthread_cancel` 返回值容错），保证在 32 位老款电视上同样稳定。
+自编译版本针对 Android bionic 做了一处兼容性修正。背景是：在 32 位老款电视（armeabi-v7a）上，iperf3 收尾时取消一个**已经退出、尚未 join** 的线程会拿到 `EINVAL` 而不是 `ESRCH`，于是把一次本已跑完的测试判为失败，并级联报出误导性的 `Bad file descriptor`。修正只在这一场景下放宽返回码判断，且通过 `__BIONIC__` 门控——glibc 等其他平台的行为完全不变。该修复已回馈上游：[esnet/iperf#2090](https://github.com/esnet/iperf/pull/2090)。
 
 因此它测的就是标准 iperf3 数字，与你在电脑上跑 `iperf3 -c` 完全等价，没有浏览器测速的 CPU 天花板问题。
 

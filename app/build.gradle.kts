@@ -24,8 +24,8 @@ android {
         // versionName 重新从 1.0.0 起算（发布历史以这一版为首版）。
         // versionCode 保持递增而不回到 1：这样已安装的旧构建可以直接覆盖升级，
         // 不必先卸载（Android 会拒绝 versionCode 降低的安装包）。
-        versionCode = 13
-        versionName = "1.0.9"
+        versionCode = 14
+        versionName = "1.0.10"
 
         // 只打 ARM 两种 ABI。电视 SoC（MT9655）可能是 32 位系统，两个都带上最稳妥。
         ndk {
